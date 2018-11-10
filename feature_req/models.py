@@ -25,7 +25,7 @@ class ProductArea(db.Model):
 
 #Request Model
 class Request(db.Model):
-    id = id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
     client_id = db.Column(

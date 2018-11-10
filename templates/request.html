@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+#request a feature
+{% block addrequest %}
+ 
+<div class="modal-body">
+    <form  id="add_request">
+      <div class="form-group">
+        <label class="control-label" for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Title"  class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="description">Description</label>
+        <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="client">Client</label>
+        <select  id="client" class="form-control" name="client"></select>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="client_priority">Client Priority</label>
+        <input type="number" id="client_priority" placeholder="1" class="form-control" name="client_priority" required>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="target_date">Target Date</label>
+          <div class="input-group date">
+            <input id="target_date" name="target_date" type="date" class="form-control" required>
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="product_area">Product Area</label>
+        <select id="product_area" class="form-control" name="product_area"></select>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Add request</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+      </div>
+</form>
+{% endblock %}

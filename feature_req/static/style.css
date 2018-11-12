@@ -1,5 +1,5 @@
 body {
-    background: #dde6e7;
+    background: #c9c7c7f3;
     color: #333333;
   }
   .features{
@@ -8,4 +8,8 @@ body {
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin-top: 20px;
+  }
+  .keys{
+    font-size: small;
+    color:rgb(140, 146, 150);  
   }

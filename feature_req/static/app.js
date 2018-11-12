@@ -16,18 +16,16 @@ var featureRequestModel = {
     	{productArea: "Reports", id: 4}
     ],
     selectedProductArea : ko.observable(1),
-    addRequest : function(formElement) {
-    var x=$(formElement).serialize()
-    // If the form data is valid, post the serialized form data to the web API.
-    $(formElement).validate();
-   
-    if ($(formElement).valid()) {
+    addRequest : function(formData) {
+    // If the form data is valid, post the.
+    $(formData).validate();
+    if ($(formData).valid()) {
         console.log("valid");
         console.log($)
             $.ajax({
                 type: 'POST',
                 url: '/request',
-                data: $(formElement).serialize(),
+                data: $(formData).serialize(),
                 success: function(response) {
                     console.log(response)
                     window.location = "/";

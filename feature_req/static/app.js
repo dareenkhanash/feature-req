@@ -38,7 +38,30 @@ var featureRequestModel = {
             });
     }
    
+    },
+    getData:function(){
+        var self=this;
+        console.log(self.featureRequests)
+        console.log("hi")
+        $.ajax({
+            url: '/getData',
+            type: 'GET',
+            success: function(response) {
+                console.log("success")
+                console.log(response.requests)
+                response.requests.map(request=>{
+                    self.featureRequests.push(request)
+                })
+                
+                console.log('done')
+                console.log(self.featureRequests)
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
     }
 
 }
-ko.applyBindings(featureRequestModel, document.getElementById("add_feature_request"));
+featureRequestModel.getData();
+ko.applyBindings(featureRequestModel, document.getElementById("feature_requests"));

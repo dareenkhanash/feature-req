@@ -13,6 +13,7 @@ def features():
 @app.route('/request',methods=['GET','POST'])
 def add_request():
     if request.method == 'POST':
+       #passes request information from form
        add_feature_request(request.form)
     return render_template('request.html')
 

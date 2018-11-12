@@ -8,9 +8,6 @@ class Client(db.Model):
     client_name = db.Column(db.String(200))
     feature_requests = db.relationship('Request', backref='client', lazy=True)
 
-    def __repr__(self):
-        return f"Client('{self.client_name}')"
-
 
 #Product Area Model
 class ProductArea(db.Model):
@@ -18,12 +15,9 @@ class ProductArea(db.Model):
     product_area = db.Column(db.String(200))
     feature_requests = db.relationship('Request', backref='product_area', lazy=True)
 
-    def __repr__(self):
-        return f"ProductArea('{self.product_area}')" 
-
-
 
 #Request Model
+#all fields are required except for the description
 class Request(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -42,7 +36,3 @@ class Request(db.Model):
     target_date = db.Column(db.Date, nullable=False)
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
     updated_on = db.Column(db.DateTime, onupdate=datetime.utcnow)
-
-    def __repr__(self):
-        return f"Request('{self.title}'),'{self.client_id}','{self.product_area_id}'"
-

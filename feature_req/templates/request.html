@@ -1,33 +1,37 @@
 {% extends 'layout.html' %}
 #request a feature
 {% block addrequest %}
- 
-<div class="modal-body">
-    <form  id="add_request">
+<div class="container" id="add_feature_request">
+  <div class="modal-body">
+    <form  id="add_request" data-bind="submit: addRequest">
       <div class="form-group">
         <label class="control-label" for="title">Title</label>
-        <input type="text" id="title" name="title" placeholder="Title"  class="form-control" required>
+        <input class="form-control" type="text" id="title" name="title" placeholder="Title" data-bind="value: title" required>
       </div>
 
       <div class="form-group">
         <label class="control-label" for="description">Description</label>
-        <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+        <textarea class="form-control" id="description" name="description" rows="5" placeholder="Description" data-bind="value: description" ></textarea>
       </div>
 
       <div class="form-group">
         <label class="control-label" for="client">Client</label>
-        <select  id="client" class="form-control" name="client"></select>
+        <select class="form-control" id="client" name="client" data-bind="
+        options: clients,
+        optionsText: 'clientName',
+        optionsValue: 'id',
+        value: selectedClient">
+      </select>
       </div>
-
       <div class="form-group">
         <label class="control-label" for="client_priority">Client Priority</label>
-        <input type="number" id="client_priority" placeholder="1" class="form-control" name="client_priority" required>
+        <input type="number" id="client_priority" placeholder="1" class="form-control" name="client_priority"  data-bind="value: clientPriority" required>
       </div>
 
       <div class="form-group">
         <label class="control-label" for="target_date">Target Date</label>
           <div class="input-group date">
-            <input id="target_date" name="target_date" type="date" class="form-control" required>
+            <input id="target_date" name="target_date" type="date" class="form-control" data-bind="value: targetDate" required>
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </div>
@@ -35,12 +39,18 @@
 
       <div class="form-group">
         <label class="control-label" for="product_area">Product Area</label>
-        <select id="product_area" class="form-control" name="product_area"></select>
+        <select id="product_area" class="form-control" name="product_area" data-bind="
+        options: productAreas,
+        optionsText: 'productArea',
+        optionsValue: 'id',
+        value: selectedProductArea"></select>
       </div>
 
       <div class="modal-footer">
         <button class="btn btn-primary" type="submit">Save</button>
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
       </div>
-</form>
+    </form>
+  </div>
+</div>
 {% endblock %}

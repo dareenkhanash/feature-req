@@ -47,12 +47,30 @@ var featureRequestModel = {
             success: function(response) {
                 console.log("success")
                 console.log(response.requests)
+
+                self.featureRequests.removeAll();
+                
                 response.requests.map(request=>{
                     self.featureRequests.push(request)
                 })
                 
                 console.log('done')
                 console.log(self.featureRequests)
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    },
+    deleteRequest: function(requestId) {
+        console.log(requestId);
+        var self=this;
+    	$.ajax({
+            url: '/request/delete/'+ requestId,
+            type: 'DELETE',
+            success: function(response) {
+                console.log("deleted")
+                self.getData();
             },
             error: function(error) {
                 console.log(error);

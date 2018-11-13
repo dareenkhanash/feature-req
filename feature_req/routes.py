@@ -16,8 +16,8 @@ def features():
 def get_features():
     requests=db.session.query(Request).join(Client, Request.client_id==Client.id).\
     join(ProductArea, Request.product_area_id==ProductArea.id).\
-    add_columns(Request.id,Request.title,Client.id,Client.client_name,Request.\
-    target_date,Request.client_priority,Request.product_area_id,ProductArea.product_area_name).\
+    add_columns(Request.id,Request.title,Client.client_name,Request.\
+    target_date,Request.client_priority,ProductArea.product_area_name).\
     order_by('Request.client_priority').all()
     request_schema=RequestSchema(many=True)
     output=request_schema.dump(requests).data
@@ -35,3 +35,17 @@ def add_request():
 @app.route('/request/<request_id>',methods=['GET','POST'])
 def edit_request(request_id=None):
     return render_template('request.html',request_id=request_id)
+
+
+@app.route('/request/delete/<int:request_id>',methods=['DELETE'])
+def delete_request(request_id):
+    print("jhhhhh")
+    if request.method == 'DELETE':
+        if request_id:
+            db.session.query(Request).filter(Request.id == request_id).\
+            delete(synchronize_session=False)
+            db.session.commit()
+            return jsonify({"message": "deleted."})
+        else:
+            return jsonify({"message": "no requestId."})
+    return jsonify({"message": "no requestId."})

@@ -14,7 +14,11 @@ def features():
 #retuens feature requests
 @app.route('/getData')
 def get_features():
-    requests=Request.query.all()
+    requests=db.session.query(Request).join(Client, Request.client_id==Client.id).\
+    join(ProductArea, Request.product_area_id==ProductArea.id).\
+    add_columns(Request.id,Request.title,Client.id,Client.client_name,Request.\
+    target_date,Request.client_priority,Request.product_area_id,ProductArea.product_area_name).\
+    order_by('Request.client_priority').all()
     request_schema=RequestSchema(many=True)
     output=request_schema.dump(requests).data
     return jsonify({'requests':output})

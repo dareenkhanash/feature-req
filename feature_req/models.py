@@ -12,7 +12,7 @@ class Client(db.Model):
 #Product Area Model
 class ProductArea(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    product_area = db.Column(db.String(200))
+    product_area_name = db.Column(db.String(200))
     feature_requests = db.relationship('Request', backref='product_area', lazy=True)
 
 

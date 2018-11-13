@@ -17,8 +17,8 @@ def add_feature_request(form):
         description=description,
         client_priority=priority,
         target_date=target_date,
-        client=client,
-        product_area=product_area
+        client_id=client,
+        product_area_id=product_area
     )
     db.session.query(Request).filter(Request.client_priority >= priority).\
     update({Request.client_priority: Request.client_priority + 1}, synchronize_session=False)

@@ -37,7 +37,7 @@ def add_request():
             add_feature_request(request.form)
         return render_template('request.html')
     except Exception as e:
-        return jsonify({'error': "Cannot Get Data"})
+        return jsonify({'error': e})
 
 
 #route to delete request

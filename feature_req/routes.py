@@ -24,7 +24,7 @@ def get_features():
         else:
             return jsonify({'messeage':'no requests'})
     except Exception as e:
-        return jsonify({'error': "Cannot Get Data"})  
+        return jsonify({'error': e})  
 
 
 

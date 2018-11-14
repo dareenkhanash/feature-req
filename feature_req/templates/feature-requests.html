@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 //render all features
 {% block featurerequest %}
-  <div class="well clearfix features">
-  <div  data-bind="foreach: featureRequests">
+  <div class="container">
+  <div data-bind="foreach: featureRequests,visible: getData()">
+  <div class="features">
     <div class="row justify-content-space-around">
         <div class="col-sm-10">
-                
             <h3 class="pull-left" data-bind="text: title" ></h3>
         </div>
         <div class="col-md-1">
-            <a class="btn btn-info pull-right" data-toggle="modal">
+            <a class="btn btn-info pull-right" data-toggle="modal" data-bind="click: function(data, event) { $root.editRequest(id) }" >
               Edit
             </a>
           </div>
@@ -38,5 +38,8 @@
           </div>
       </div> 
   </div>
-</div>         
+</div>
+  
+</div>     
+    
 {% endblock %}

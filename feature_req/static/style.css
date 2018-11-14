@@ -5,11 +5,13 @@ body {
   .features{
     background: #fcfcfc;
     padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
+    border-radius: 5px;
     margin-top: 20px;
   }
   .keys{
     font-size: small;
     color:rgb(140, 146, 150);  
+  }
+  .hidden{
+    visibility: hidden
   }

@@ -20,14 +20,12 @@ var featureRequestModel = {
     // If the form data is valid, post the.
     $(formData).validate();
     if ($(formData).valid()) {
-        console.log("valid");
         console.log($)
             $.ajax({
                 type: 'POST',
                 url: '/request',
                 data: $(formData).serialize(),
                 success: function(response) {
-                    console.log(response)
                     window.location = "/";
                 },
                 error: function(error) {
@@ -39,45 +37,53 @@ var featureRequestModel = {
     },
     getData:function(){
         var self=this;
-        console.log(self.featureRequests)
-        console.log("hi")
         $.ajax({
             url: '/getData',
             type: 'GET',
             success: function(response) {
-                console.log("success")
-                console.log(response.requests)
-
-                self.featureRequests.removeAll();
-                
-                response.requests.map(request=>{
-                    self.featureRequests.push(request)
-                })
-                
-                console.log('done')
-                console.log(self.featureRequests)
+                self.featureRequests(response.requests)
+                return true;
             },
             error: function(error) {
                 console.log(error);
+                return false
             }
         });
+        return true
     },
     deleteRequest: function(requestId) {
-        console.log(requestId);
         var self=this;
     	$.ajax({
             url: '/request/delete/'+ requestId,
             type: 'DELETE',
             success: function(response) {
-                console.log("deleted")
                 self.getData();
             },
             error: function(error) {
                 console.log(error);
             }
         });
-    }
-
+    },
+    editRequest: function(requestId) {
+        window.location = "/request/"+requestId;
+    },
+    updateRequest: function(formData) {
+        $(formData).validate();
+        if ($(formData).valid()) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/request/update',
+                    data: $(formData).serialize(),
+                    success: function(response) {
+                        console.log(response)
+                        window.location = "/";
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+         }
 }
-featureRequestModel.getData();
-ko.applyBindings(featureRequestModel, document.getElementById("feature_requests"));
+}
+
+ko.applyBindings(featureRequestModel);

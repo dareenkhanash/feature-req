@@ -1,33 +1,34 @@
 {% extends 'layout.html' %}
-#request a feature
-{% block addrequest %}
-<div class="container" id="add_feature_request">
-    <form  id="add_request" data-bind="submit: addRequest">
+#edit a request
+{% block editrequest %}
+<div class="container" >
+    {% if request[0] %}
+    <form  id="add_request" data-bind="submit: updateRequest">
       <div class="form-group">
         <label class="control-label" for="title">Title</label>
-        <input class="form-control" type="text" id="title" name="title" placeholder="Title" data-bind="value: title" required>
+        <input class="form-control" type="text" id="title" name="title" placeholder="Title" value={{request[0].title}} required>
       </div>
       <div class="form-group">
         <label class="control-label" for="description">Description</label>
-        <textarea class="form-control" id="description" name="description" rows="5" placeholder="Description" data-bind="value: description" ></textarea>
+        <textarea class="form-control" id="description" name="description" rows="5" placeholder="Description"  >{{request[0].description}}</textarea>
       </div>
       <div class="form-group">
         <label class="control-label" for="client">Client</label>
         <select class="form-control" id="client" name="client" data-bind="
         options: clients,
         optionsText: 'clientName',
-        optionsValue: 'id',
-        value: selectedClient">
+        optionsValue: 'id'"
+        value={{request[0].client_id}}>
       </select>
       </div>
       <div class="form-group">
         <label class="control-label" for="client_priority">Client Priority</label>
-        <input type="number" id="client_priority" placeholder="1" class="form-control" name="client_priority"  data-bind="value: clientPriority" required>
+        <input type="number" id="client_priority" placeholder="1" class="form-control" name="client_priority" value={{request[0].client_priority}} required>
       </div>
       <div class="form-group">
         <label class="control-label" for="target_date">Target Date</label>
           <div class="input-group date">
-            <input id="target_date" name="target_date" type="date" class="form-control" data-bind="value: targetDate" required>
+            <input id="target_date" name="target_date" type="date" class="form-control" value={{request[0].target_date}} required>
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </div>
@@ -37,10 +38,20 @@
         <select id="product_area" class="form-control" name="product_area" data-bind="
         options: productAreas,
         optionsText: 'productArea',
-        optionsValue: 'id',
-        value: selectedProductArea"></select>
+        optionsValue: 'id'"
+        value={{request[0].product_area_id}}>
+      </select>
       </div>
-        <button class="btn btn-primary pull-right"  type="submit">Save</button>
+      <div class="form-group hidden">
+            <input class="form-control" type="text" id="id" name="id" placeholder="Title" value={{request[0].id}}>
+        </div>
+      <div >
+        <button class="btn btn-primary pull-right"  type="submit">Edit</button>
+      </div>
     </form>
+{% else%}
+<div> No request to edit</div>
+{% endif %}
 </div>
+
 {% endblock %}

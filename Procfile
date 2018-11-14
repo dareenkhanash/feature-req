@@ -1,1 +1,1 @@
-web: python run.py $5432
+web: python run.py 

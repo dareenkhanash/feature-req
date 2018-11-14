@@ -46,10 +46,10 @@ def delete_request(request_id):
     try:
         if request.method == 'DELETE':
             if request_id:
-            delete_feature_request(request_id)
-            return jsonify({"message": "Request deleted"})
+               delete_feature_request(request_id)
+               return jsonify({"message": "Request deleted"})
             else:
-                return jsonify({"error": "No Request Id"})
+               return jsonify({"error": "No Request Id"})
     except Exception as e:
         return jsonify({'error': "Cannot delete request"})
 
@@ -69,8 +69,8 @@ def update_request():
     try:
         if request.method == 'POST':
         #passes request information from form
-        update_feature_request(request.form)
-        return jsonify({"message": "done"})
+           update_feature_request(request.form)
+           return jsonify({"message": "done"})
     except Exception as e:
         return jsonify({'error': "Cannot update request"})
 

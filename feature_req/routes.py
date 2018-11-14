@@ -12,7 +12,7 @@ def features():
     return render_template('feature-requests.html')
 
 
-#retuens feature requests
+#return feature requests
 @app.route('/getData')
 def get_features():
     try:
@@ -37,35 +37,43 @@ def add_request():
             add_feature_request(request.form)
         return render_template('request.html')
     except Exception as e:
-        return jsonify({'error': "Cannot Get DataS"})
+        return jsonify({'error': "Cannot Get Data"})
 
 
-
+#route to delete request
 @app.route('/request/delete/<int:request_id>',methods=['DELETE'])
 def delete_request(request_id):
-    if request.method == 'DELETE':
-        if request_id:
-           delete_feature_request(request_id)
-           return jsonify({"message": "Request deleted"})
-        else:
-            return jsonify({"error": "No Request Id"})
-    else:
-        return jsonify({"error": "Request Method for this route should be DELETE"})
+    try:
+        if request.method == 'DELETE':
+            if request_id:
+            delete_feature_request(request_id)
+            return jsonify({"message": "Request deleted"})
+            else:
+                return jsonify({"error": "No Request Id"})
+    except Exception as e:
+        return jsonify({'error': "Cannot delete request"})
 
-
+#go to update route
 @app.route('/request/<int:request_id>',methods=['GET','POST','PUT'])
 def edit_request(request_id):
-    request=db.session.query(Request).filter(Request.id == request_id).all()
-    return render_template('edit-request.html',request=request)
+    try:
+        request=db.session.query(Request).filter(Request.id == request_id).all()
+        return render_template('edit-request.html',request=request)
+    except Exception as e:
+        return jsonify({'error': "Cannot go to update route"})
 
 
-# route to add new feature request
+# route to update feature request
 @app.route('/request/update',methods=['POST'])
 def update_request():
-    if request.method == 'POST':
-       #passes request information from form
-       update_feature_request(request.form)
-       return jsonify({"message": "done"})
+    try:
+        if request.method == 'POST':
+        #passes request information from form
+        update_feature_request(request.form)
+        return jsonify({"message": "done"})
+    except Exception as e:
+        return jsonify({'error': "Cannot update request"})
+
        
 
     

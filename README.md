@@ -33,6 +33,7 @@ install pip
   2. Install requirements in requirements.text
   3. Run python create_db.py
   4. Run python run.py
+  5. Run app on http://localhost:5000 
 
 
 

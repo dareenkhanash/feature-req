@@ -41,6 +41,7 @@ var featureRequestModel = {
             url: '/getData',
             type: 'GET',
             success: function(response) {
+                console.log(response)
                 self.featureRequests(response.requests)
                 return true;
             },
@@ -75,7 +76,6 @@ var featureRequestModel = {
                     url: '/request/update',
                     data: $(formData).serialize(),
                     success: function(response) {
-                        console.log(response)
                         window.location = "/";
                     },
                     error: function(error) {
@@ -83,7 +83,17 @@ var featureRequestModel = {
                     }
                 });
          }
-}
+    },
+    editData: function(client) {
+        //change selected client for the request we want to update
+        this.selectedClient(client);
+
+    },
+    editProductArea: function(value) {
+        //change selected product area for the request we want to update
+        this.selectedProductArea(value)
+    }
+    
 }
 
 ko.applyBindings(featureRequestModel);

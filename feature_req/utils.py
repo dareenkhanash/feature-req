@@ -5,22 +5,27 @@ from feature_req.models import Request, Client, ProductArea
 from sqlalchemy.orm import validates
 
 
-
 def change_priority(priority,clientid,id=0):
-    old_priority=priority
+    new_priority=priority
     request_id=id
-    while old_priority > 0:
-        equeal=db.session.query(Request).filter(Request.client_priority == old_priority).\
+    print('first')
+    print(request_id)
+    while new_priority > 0:
+        equeal=db.session.query(Request).filter(Request.client_priority == new_priority).\
         filter(Request.client_id == clientid).filter(Request.id != request_id).all()
         if equeal:
-           db.session.query(Request).filter(Request.client_priority == old_priority).\
+           db.session.query(Request).filter(Request.client_priority == new_priority).\
            filter(Request.client_id == clientid).\
            filter(Request.id != request_id).\
            update({Request.client_priority: Request.client_priority + 1}, synchronize_session=False)
-           old_priority=equeal[0].client_priority+1
+           new_priority=equeal[0].client_priority +1
+           print('new_priority')
+           print(new_priority)
            request_id=equeal[0].id
+           print('request_id')
+           print(request_id)
         else:
-           old_priority=0
+           new_priority=0
     return
 
 # add new feature request to database 
@@ -56,44 +61,42 @@ def delete_feature_request(id):
     return
 
 
+
 #update request
 def update_feature_request(form):
     #get all data from form
-    try:
-        id = form['id']
-        title = form['title']
-        description = form['description']
-        client = form['client']
-        priority = int(form['client_priority'])
-        target_date = datetime.strptime(form['target_date'], '%Y-%m-%d')
-        product_area= form['product_area']
-
+    id = form['id']
+    title = form['title']
+    description = form['description']
+    client = form['client']
+    priority = int(form['client_priority'])
+    target_date = datetime.strptime(form['target_date'], '%Y-%m-%d')
+    product_area= form['product_area']
     
-        #update priorities for old request features if they are less than the updated one
-        change_priority(priority,client,id)
-        #update request
-        db.session.query(Request).filter(Request.id == id).\
-        update({Request.title:title,
-        Request.description:description,
-        Request.title:title,
-        Request.client_priority:priority,
-        Request.client_id:client,
-        Request.product_area_id:product_area
-        }, synchronize_session=False)
+     #update request
+    db.session.query(Request).filter(Request.id == id).\
+    update({Request.title:title,
+    Request.description:description,
+    Request.title:title,
+    Request.client_priority:priority,
+    Request.client_id:client,
+    Request.product_area_id:product_area
+    }, synchronize_session=False)
 
-        db.session.commit()
-    except Exception as e:
-        return jsonify({"error" : "Cannot update request"})  
+    #update priorities for old request features if they are less than the updated one
+    change_priority(priority,client,id)
+   
+   
+
+    db.session.commit()
+    return
 
 
 #get all requests
 def get_requests():
-    try:
-        requests=db.session.query(Request).join(Client, Request.client_id==Client.id).\
-        join(ProductArea, Request.product_area_id==ProductArea.id).\
-        add_columns(Request.id,Request.title,Request.description,Client.client_name,Request.\
-        target_date,Request.client_priority,ProductArea.product_area_name).\
-        order_by('Request.client_priority').all()
-        return requests
-    except Exception as e:
-        return jsonify({"error" : "Cannot retreive data from database"})  
+    requests=db.session.query(Request).join(Client, Request.client_id==Client.id).\
+    join(ProductArea, Request.product_area_id==ProductArea.id).\
+    add_columns(Request.id,Request.title,Request.description,Client.client_name,Request.\
+    target_date,Request.client_priority,ProductArea.product_area_name).\
+    order_by('client_priority').all()
+    return requests

@@ -3,6 +3,7 @@
 {% block editrequest %}
 <div class="container" >
     {% if request[0] %}
+  
     <form  id="add_request" data-bind="submit: updateRequest">
       <div class="form-group">
         <label class="control-label" for="title">Title</label>
@@ -17,8 +18,9 @@
         <select class="form-control" id="client" name="client" data-bind="
         options: clients,
         optionsText: 'clientName',
-        optionsValue: 'id'"
-        value={{request[0].client_id}}>
+        optionsValue: 'id',
+        value: selectedClient ">
+        
       </select>
       </div>
       <div class="form-group">
@@ -38,9 +40,8 @@
         <select id="product_area" class="form-control" name="product_area" data-bind="
         options: productAreas,
         optionsText: 'productArea',
-        optionsValue: 'id'"
-        value={{request[0].product_area_id}}>
-      </select>
+        optionsValue: 'id',
+        value: selectedProductArea"></select>
       </div>
       <div class="form-group hidden">
             <input class="form-control" type="text" id="id" name="id" placeholder="Title" value={{request[0].id}}>
@@ -48,7 +49,17 @@
       <div >
         <button class="btn btn-primary pull-right"  type="submit">Edit</button>
       </div>
+      <div class="hidden" data-bind="text: editData({{request[0].client_id}})"> 
+      </div>
+      <div class="hidden" data-bind="text: editProductArea({{request[0].product_area_id}})"> 
+        </div>
     </form>
+   
+    <footer class=" row page-footer font-small">
+        <div class="footer-copyright text-center py-3">
+        
+        </div>
+    </footer>
 {% else%}
 <div> No request to edit</div>
 {% endif %}

@@ -22,14 +22,17 @@ existing piece of software.
 
 ### Installing Dependencies
 
-From within the root directory:
-
 ```sh
 install python 
+install pip
 
 ```
 
 ## Usage
-  Clone or download the repo 
+  1. Clone or download the repo 
+  2. Install requirements in requirements.text
+  3. Run python create_db.py
+  4. Run python run.py
+
 
 

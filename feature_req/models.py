@@ -1,5 +1,5 @@
 from datetime import datetime
-from feature_req import db
+from feature_req.app import db
 
 
 #Client Model 

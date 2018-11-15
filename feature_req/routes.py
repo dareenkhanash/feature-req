@@ -1,19 +1,23 @@
-from flask import render_template,request,jsonify
-from feature_req import app, db
+from flask import Blueprint, render_template,request,jsonify
+from feature_req.app import db
 from datetime import datetime
 from feature_req.models import Request, Client, ProductArea
 from feature_req.utils import add_feature_request,delete_feature_request,update_feature_request,get_requests
 from feature_req.schema import RequestSchema
 
 
+feature_req=Blueprint('feature_req',__name__)   
+
+
 #render main page
-@app.route('/')
+@feature_req.route('/')
 def features():
     return render_template('feature-requests.html')
 
 
+
 #return feature requests
-@app.route('/getData')
+@feature_req.route('/getData')
 def get_features():
     try:
         requests=get_requests()
@@ -24,12 +28,12 @@ def get_features():
         else:
             return jsonify({'messeage':'no requests'})
     except Exception as e:
-        return jsonify({'error': e})  
+        return jsonify("error: {0}".format(e))  
 
 
 
 # route to add new feature request
-@app.route('/request',methods=['GET','POST'])
+@feature_req.route('/request',methods=['GET','POST'])
 def add_request():
     try:
         if request.method == 'POST':
@@ -37,11 +41,11 @@ def add_request():
             add_feature_request(request.form)
         return render_template('request.html')
     except Exception as e:
-        return jsonify({'error': e})
+        return jsonify("error: {0}".format(e))
 
 
 #route to delete request
-@app.route('/request/delete/<int:request_id>',methods=['DELETE'])
+@feature_req.route('/request/delete/<int:request_id>',methods=['DELETE'])
 def delete_request(request_id):
     try:
         if request.method == 'DELETE':
@@ -51,20 +55,20 @@ def delete_request(request_id):
             else:
                return jsonify({"error": "No Request Id"})
     except Exception as e:
-        return jsonify({'error': "Cannot delete request"})
+        return jsonify("error: {0}".format(e))
 
 #go to update route
-@app.route('/request/<int:request_id>',methods=['GET','POST','PUT'])
+@feature_req.route('/request/<int:request_id>',methods=['GET','POST','PUT'])
 def edit_request(request_id):
     try:
         request=db.session.query(Request).filter(Request.id == request_id).all()
         return render_template('edit-request.html',request=request)
     except Exception as e:
-        return jsonify({'error': "Cannot go to update route"})
+        return jsonify("error: {0}".format(e))
 
 
 # route to update feature request
-@app.route('/request/update',methods=['POST'])
+@feature_req.route('/request/update',methods=['POST'])
 def update_request():
     try:
         if request.method == 'POST':
@@ -72,7 +76,7 @@ def update_request():
            update_feature_request(request.form)
            return jsonify({"message": "done"})
     except Exception as e:
-        return jsonify({'error': "Cannot update request"})
+        return jsonify("error: {0}".format(e))
 
        
 

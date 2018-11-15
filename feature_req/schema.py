@@ -1,9 +1,8 @@
 from feature_req.models import Request, Client, ProductArea
 from flask_marshmallow import Marshmallow
-from feature_req import app
 
 
-ma = Marshmallow(app)
+ma = Marshmallow()
 
 
 class ClientSchema(ma.ModelSchema):

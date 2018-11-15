@@ -26,6 +26,7 @@ var featureRequestModel = {
                 url: '/request',
                 data: $(formData).serialize(),
                 success: function(response) {
+                    console.log(response);
                     window.location = "/";
                 },
                 error: function(error) {
@@ -58,6 +59,7 @@ var featureRequestModel = {
             url: '/request/delete/'+ requestId,
             type: 'DELETE',
             success: function(response) {
+                console.log(response);
                 self.getData();
             },
             error: function(error) {
@@ -76,6 +78,7 @@ var featureRequestModel = {
                     url: '/request/update',
                     data: $(formData).serialize(),
                     success: function(response) {
+                        console.log(response);
                         window.location = "/";
                     },
                     error: function(error) {

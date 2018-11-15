@@ -1,4 +1,4 @@
-from feature_req import app, db
+from feature_req.app import db
 from flask import request, json, jsonify
 from datetime import datetime
 from feature_req.models import Request, Client, ProductArea

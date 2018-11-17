@@ -6,11 +6,22 @@ feature-req is a web application that allowes the user to create &quot;feature r
 A &quot;feature request&quot; is a request for a new feature that will be added onto an
 existing piece of software.
 
-## Table of Contents
-* [Requirements](#Requirements)
-* [Installation](#Installation)
-* [Usage](#Usage)
+##Application Overview
 
+Feature Requests:
+GET /getData
+
+Add Request:
+POST /request/{request form data}
+
+Delete Request:
+DELETE /request/delete/:request_id
+
+Edit Request:
+GET /request/:request_id
+
+Update Request:
+POST /request/update/{request form data}
 
 ## Requirements
 
@@ -44,20 +55,39 @@ source feature_request_env/bin/activate
 pip install -r requirements.txt
 
 ```
-  3. create database 
+  3. Navigate to feature-req folder and add .env file with this variable
+
+```sh
+export DATABASE_URL="sqlite:///featurerequests.db"
+
+```
+
+  4. create database in terminal run:
 
 ```sh
 python create_db.py
 
 ```
 
-  4. Run app 
+  5. Run app in terminal navigate to the root of feature-req folder and run:
 
 ```sh
 python run.py
 
 ```
-  5. check app on http://localhost:5000 
+  6. check app on http://localhost:5000 
+
+
+
+## Run Test
+
+navigate to feature-req folder 
+
+```sh
+python test_app.py
+
+```
+
 
 
 

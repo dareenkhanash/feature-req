@@ -6,7 +6,7 @@ feature-req is a web application that allowes the user to create &quot;feature r
 A &quot;feature request&quot; is a request for a new feature that will be added onto an
 existing piece of software.
 
-##Application Overview
+## Application Overview
 
 Feature Requests:
 GET /getData

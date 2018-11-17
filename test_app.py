@@ -47,7 +47,19 @@ class FeatureRequestTestCase(unittest.TestCase):
     def test_getData_Route(self):
         resp = self.app_client.get('/getData')
         self.assertEqual(200, resp.status_code)
-   
+
+    #test request route status code 
+    def test_request_Route(self):
+        resp = self.app_client.get('/request')
+        self.assertEqual(200, resp.status_code)
+
+    #test delete route
+    def test_delete_request(self):
+        resp = self.app_client.delete(f"/request/delete/{self.request.id}")
+        self.assertEqual(200, resp.status_code)
+
+
+
    
 
 if __name__ == '__main__':

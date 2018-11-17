@@ -15,30 +15,33 @@ var featureRequestModel = {
     	{productArea: "Claims", id: 3},
     	{productArea: "Reports", id: 4}
     ],
+    errors:ko.observable(""),
     selectedProductArea : ko.observable(1),
-    addRequest : function(formElement) {
-        // If the form data is valid, post request
-        $(formElement).validate();    
-        if ($(formElement).valid()) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/request',
-                    data: $(formElement).serialize(),
-                    success: function(response) {
-                        if(response.error){
-                            console.log(response.error)
-                        }else{
-                            window.location = "/";
+        addRequest : function(formElement) {
+            var self=this;
+            // If the form data is valid, post request
+            $(formElement).validate();    
+            if ($(formElement).valid()) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/request',
+                        data: $(formElement).serialize(),
+                        success: function(response) {
+                            if(response.error){
+                                console.log(response.error)
+                                self.errors("Can not Add request")
+                            }else{
+                                window.location = "/";
+                            }
+                        
+                        },
+                        error: function(error) {
+                            console.log(error);
                         }
-                       
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-        }
-       
-    },
+                    });
+            }
+        
+        },
     getData:function(){
         var self=this;
         $.ajax({
@@ -74,6 +77,7 @@ var featureRequestModel = {
         window.location = "/request/"+requestId;
     },
     updateRequest: function(formData) {
+        var self=this;
         $(formData).validate();
         if ($(formData).valid()) {
                 $.ajax({
@@ -83,8 +87,9 @@ var featureRequestModel = {
                     success: function(response) {
                         if(response.error){
                             console.log(response.error)
+                            self.errors("Cannot update request")
                         }else{
-                          //  window.location = "/";
+                            window.location = "/";
                         }
                     },
                     error: function(error) {

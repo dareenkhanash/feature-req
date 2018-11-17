@@ -58,7 +58,7 @@ def delete_request(request_id):
         return jsonify("error: {0}".format(e))
 
 #go to update route
-@feature_req.route('/request/<int:request_id>',methods=['GET','POST','PUT'])
+@feature_req.route('/request/<int:request_id>')
 def edit_request(request_id):
     try:
         request=db.session.query(Request).filter(Request.id == request_id).all()

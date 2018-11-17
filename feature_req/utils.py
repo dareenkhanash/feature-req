@@ -30,7 +30,6 @@ def change_priority(priority,clientid,id=0):
 
 # add new feature request to database 
 def add_feature_request(form):
-    print(form)
     title = form['title']
     description = form['description']
     client = form['client']

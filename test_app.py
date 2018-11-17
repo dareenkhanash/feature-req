@@ -56,8 +56,33 @@ class FeatureRequestTestCase(unittest.TestCase):
     #test delete route
     def test_delete_request(self):
         resp = self.app_client.delete(f"/request/delete/{self.request.id}")
-        self.assertEqual(200, resp.status_code)
+        self.assertEqual(201, resp.status_code)
 
+
+    #test posting request   
+    def test_add_request(self):
+        request_data={'title': 'testTitle','description': 'testDescription',
+        'client_id': 1, 'client_priority': 1,
+        'target_date': '2018-11-05', 'product_area_id': 1}
+        resp = self.app_client.post('/request',
+        headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
+        data=json.dumps(request_data))
+        self.assertEqual(201, resp.status_code)
+
+    
+    #test render edit requet route
+    def test_edit_request(self):
+        resp = self.app_client.get(f"/request/{self.request.id}")   
+        self.assertEqual(200, resp.status_code)
+  
+    #test update route
+    def test_update_request(self):
+        request_data="id=1&title=testTitle&description=testDescription&client_id=1&client_priority=1&target_date=2018-11-05&product_area_id=1"
+        print(request_data) 
+        resp = self.app_client.post(f"/request/update",
+        data =request_data)   
+        self.assertEqual(201, resp.status_code)
+      
 
 
    

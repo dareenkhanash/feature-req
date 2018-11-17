@@ -16,25 +16,28 @@ var featureRequestModel = {
     	{productArea: "Reports", id: 4}
     ],
     selectedProductArea : ko.observable(1),
-    addRequest : function(formData) {
-    // If the form data is valid, post the.
-    $(formData).validate();
-    if ($(formData).valid()) {
-        console.log($)
-            $.ajax({
-                type: 'POST',
-                url: '/request',
-                data: $(formData).serialize(),
-                success: function(response) {
-                    console.log(response);
-                    window.location = "/";
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-    }
-   
+    addRequest : function(formElement) {
+        // If the form data is valid, post request
+        $(formElement).validate();    
+        if ($(formElement).valid()) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/request',
+                    data: $(formElement).serialize(),
+                    success: function(response) {
+                        if(response.error){
+                            console.log(response.error)
+                        }else{
+                            window.location = "/";
+                        }
+                       
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+        }
+       
     },
     getData:function(){
         var self=this;
@@ -78,8 +81,11 @@ var featureRequestModel = {
                     url: '/request/update',
                     data: $(formData).serialize(),
                     success: function(response) {
-                        console.log(response);
-                        window.location = "/";
+                        if(response.error){
+                            console.log(response.error)
+                        }else{
+                          //  window.location = "/";
+                        }
                     },
                     error: function(error) {
                         console.log(error);

@@ -28,12 +28,36 @@ install pip
 
 ```
 
-## Usage
+## Run locally
   1. Clone or download the repo 
-  2. Install requirements in requirements.text
-  3. Run python create_db.py
-  4. Run python run.py
-  5. Run app on http://localhost:5000 
+
+```sh
+git clone https://github.com/dareenkhanash/feature-req  
+
+```
+  2. create virtual enviroment and install requirements 
+
+```sh
+pip install virtualenv
+virtualenv feature_request_env
+source feature_request_env/bin/activate
+pip install -r requirements.txt
+
+```
+  3. create database 
+
+```sh
+python create_db.py
+
+```
+
+  4. Run app 
+
+```sh
+python run.py
+
+```
+  5. check app on http://localhost:5000 
 
 
 

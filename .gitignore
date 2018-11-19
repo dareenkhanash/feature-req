@@ -1,4 +1,6 @@
 __pycache__
 .env
-feature_req/featurerequests.db
+**/featurerequests.db
 test_app.pyc
+**/__init__.pyc
+

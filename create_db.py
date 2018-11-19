@@ -7,6 +7,9 @@ app = create_app()
 app.app_context().push()
 with app.app_context():
     db.create_all(None)
+    client=Client(client_name='Client A')
+    db.session.add(client)
+    db.session.commit()
 
     pa=ProductArea(product_area_name='Policies')
     db.session.add(pa)
@@ -21,9 +24,7 @@ with app.app_context():
     db.session.add(pa)
     db.session.commit()
 
-    client=Client(client_name='Client A')
-    db.session.add(client)
-    db.session.commit()
+    
     client=Client(client_name='Client B')
     db.session.add(client)
     db.session.commit()

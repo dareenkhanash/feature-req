@@ -26,12 +26,17 @@ POST /request/update/{request form data}
 ## Requirements
 
     • OS: Ubuntu
-    • Server Side Scripting: Python 3.6+
+    • Server Side Scripting: Python 3.6
     • Server Framework: Flask
     • ORM: Sql-Alchemy
     • JavaScript: JQuery and KnockoutJS
 
-### Installing Dependencies
+## Deployment
+The app is running on an AWS EC2 instance. 
+Ubuntu 18.4 LTS provided by AWS.
+PostgresSQL production instance is running on the same machine.
+
+## Installing Dependencies
 
 ```sh
 install python 

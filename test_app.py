@@ -7,12 +7,12 @@ from datetime import datetime
 from feature_req.app import create_app
 from feature_req.models import Request, Client, ProductArea
 from feature_req.models import db
-
+from test_config import Config
 
 class FeatureRequestTestCase(unittest.TestCase):
 #test app
     def setUp(self):
-        self.app = create_app('test_config')
+        self.app = create_app(Config)
         self.app_client = self.app.test_client()
         self.app_context = self.app.app_context()
         self.app_context.push()

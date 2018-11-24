@@ -210,7 +210,7 @@ POSTGRES = {
 
 
 
-  4. create database in terminal run:
+  4. create tables in terminal navigate to the root of feature-req folder and run:
 
 
 

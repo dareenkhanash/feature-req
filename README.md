@@ -72,8 +72,6 @@ Ubuntu 18.4 LTS provided by AWS.</br>
 
 PostgresSQL production instance is running on the same machine.</br>
 
-watch it live on : http://ec2-3-16-154-121.us-east-2.compute.amazonaws.com/
-
 
 
 ## Installing Dependencies
